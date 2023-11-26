@@ -8,3 +8,9 @@ In cod, aceste functii vor primi numele de memal, memalcont, memreal si memdeal
 - https://www.youtube.com/watch?v=sZ8GJ1TiMdk - Writing My Own Malloc in C
 - https://github.com/tsoding/memalloc/
 - https://danluu.com/malloc-tutorial/
+
+## Compilare && Rulare
+
+```console
+gcc ./src/main.c ./src/alloc.c -o ./bin/alloc.o && ./bin/alloc.o
+```
