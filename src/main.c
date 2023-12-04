@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "inc/alloc.h"
+#include "../inc/alloc.h"
 
 int main() {
     struct block_meta block;
