@@ -6,5 +6,6 @@ In cod, aceste functii vor primi numele de memal, memalcont, memreal si memdeal
 ## Referinte
 
 - https://www.youtube.com/watch?v=sZ8GJ1TiMdk - Writing My Own Malloc in C
-- https://github.com/tsoding/memalloc/
-- https://danluu.com/malloc-tutorial/
+- https://github.com/tsoding/memalloc/ - GitHub repo for the above video
+- https://danluu.com/malloc-tutorial/ - Warmup code
+- https://www.reddit.com/r/learnprogramming/comments/bjnp4m/makefile_placing_objects_in_separate_directory/ - Makefile help
