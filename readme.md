@@ -1,7 +1,7 @@
 # alloc
 
 Implementare proprie a functiilor malloc, calloc, realloc si free, care pot fi folosite de mai multe procese concomitent.
-In cod, aceste functii vor primi numele de memal, memalcont, memreal si memdeal
+In cod, aceste functii vor primi numele de allocate_memory, allocate_clear_memory, reallocate_memory si deallocate_memory
 
 ## Referinte
 

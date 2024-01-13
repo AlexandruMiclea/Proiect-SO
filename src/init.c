@@ -1,3 +1,4 @@
 #include "../inc/alloc.h"
 
-void* global_base = NULL;
+void* heap_begin = NULL;
+void* heap_end = NULL;

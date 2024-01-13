@@ -1,28 +1,50 @@
+#ifndef ALLOC_H
+#define ALLOC_H
+
 #include <assert.h>
 #include <string.h>
 #include <sys/types.h>
 #include <unistd.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <stdint.h>
+#include <sys/mman.h>
+#include <sys/stat.h>
+#include <bits/mman-linux.h>
 
-#ifndef ALLOC
-#define ALLOC
+// the linked list will be arranged as follows:
 
-struct block_meta {
-    size_t size;
-    struct block_meta *next;
+/*
+--------------------------------------------------------        --------------------------------------------------------
+|            |                                         |        |            |                                         |
+|  metadata  |          size bytes of memory           |   ->   |  metadata  |          size bytes of memory           |
+|            |                                         |        |            |                                         |
+--------------------------------------------------------        --------------------------------------------------------
+*/
+
+typedef struct block_metadata {
     int free;
-    int magic;
-};
+    size_t size;
+    struct block_metadata *next;
+    struct block_metadata *prev;
+} block_metadata;
 
-#define META_SIZE sizeof(struct block_meta)
+#define METADATA_SIZE sizeof(block_metadata)
+#define PAGE_ALIGNED_SIZE(x) (((x) + 0x0FFF) & 0xF000)
 
-extern void *global_base;
+extern void *heap_begin;
+extern void *heap_end;
 
-struct block_meta *find_free_block(struct block_meta **last, size_t size);
-struct block_meta *request_space(struct block_meta* last, size_t size);
+block_metadata *find_free_block(block_metadata** last, size_t req_size);
+block_metadata *request_space(block_metadata* last, size_t req_size);
+//block_metadata *create_block(block_metadata* left, block_metadata* right);
 
-void *memal (size_t size);
-void *memreal (void* ptr, size_t size);
-void *memalcont (size_t cnt, size_t size);
-void memdeal (void* ptr);
 
-#endif /*ALLOC*/
+// the four methods of interest
+
+void *allocate_memory (size_t size);
+void *reallocate_memory (void* ptr, size_t size);
+void *allocate_clear_memory(size_t cnt, size_t size);
+void deallocate_memory (void* ptr);
+
+#endif /*ALLOC_H*/
