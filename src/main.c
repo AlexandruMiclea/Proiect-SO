@@ -53,11 +53,47 @@ int main() {
     //     pointer = pointer->next;
     // }
 
-    int* first_alloc = allocate_memory(100);
-    int* second_alloc = allocate_memory(100);
-    int* third_alloc = allocate_memory(100);
+    // int* first_alloc = allocate_memory(10 * sizeof(int));
+    // for (int i = 0; i < 10; i++) {
+    //     first_alloc[i] = i + 10;
+    // }
+    // deallocate_memory(first_alloc);
+    // for (int i = 0; i < 10; i++) {
+    //     first_alloc[i] = i + 10;
+    //     printf("%d", first_alloc[i]);
+    // }
+    // printf("\n");
+    // int* second_alloc = allocate_clear_memory(0,10 * sizeof(int));
+    // printf("%p %p", first_alloc, second_alloc);
+    // printf("\n");
+    // for (int i = 0; i < 10; i++) {
+    //     printf("%d", first_alloc[i]);
+    // }
+    // block_metadata* pointer = heap_begin;
+    // while (pointer != NULL){
+    //     printf("%d %d\n", pointer->size, pointer->free);
+    //     pointer = pointer->next;
+    // }
 
-    deallocate_memory(second_alloc);
+    // deallocate_memory(first_alloc);
+
+    // pointer = heap_begin;
+    // while (pointer != NULL){
+    //     printf("%d %d\n", pointer->size, pointer->free);
+    //     pointer = pointer->next;
+    // }
+
+    // deallocate_memory(third_alloc);
+
+    // pointer = heap_begin;
+    // while (pointer != NULL){
+    //     printf("%d %d\n", pointer->size, pointer->free);
+    //     pointer = pointer->next;
+    // }
+
+    // buggy behavior
+
+    int* space = allocate_memory(100);
 
     block_metadata* pointer = heap_begin;
     while (pointer != NULL){
@@ -65,7 +101,7 @@ int main() {
         pointer = pointer->next;
     }
 
-    deallocate_memory(first_alloc);
+    space = reallocate_memory(space, 20);
 
     pointer = heap_begin;
     while (pointer != NULL){
@@ -73,7 +109,7 @@ int main() {
         pointer = pointer->next;
     }
 
-    deallocate_memory(third_alloc);
+    space = reallocate_memory(space, 120);
 
     pointer = heap_begin;
     while (pointer != NULL){
