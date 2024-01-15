@@ -59,6 +59,16 @@ block_metadata *split_residual_memory(block_metadata* block, size_t occupied_siz
         new_free_block-> size = total_space - occupied_size - 2 * METADATA_SIZE;
         new_free_block->prev = block;
         new_free_block->free = 1;
+        if (block->next != NULL){
+            // new_free_block->next = block->next;
+            // block->next->prev = new_free_block;
+            if (block->next->free == 1){
+                coalesce(new_free_block, block->next);
+            }else {
+                new_free_block->next = block->next;
+                block->next->prev = new_free_block;
+            }
+        }
         block->next = new_free_block;
         block->size = occupied_size;
     }
