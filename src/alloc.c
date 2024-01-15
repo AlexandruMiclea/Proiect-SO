@@ -54,10 +54,12 @@ block_metadata *split_residual_memory(block_metadata* block, size_t occupied_siz
     
     if (occupied_size + 2 * METADATA_SIZE < total_space){
         // pointer arithmetic
-        block_metadata* new_free_block = block + (occupied_size + METADATA_SIZE) / METADATA_SIZE;   
+        block_metadata* new_free_block = (void*)block + METADATA_SIZE + occupied_size;
+
         // in all the required space I place my metadata nodes and the actual memory I use
         new_free_block-> size = total_space - occupied_size - 2 * METADATA_SIZE;
         new_free_block->prev = block;
+        new_free_block->next = NULL;
         new_free_block->free = 1;
         if (block->next != NULL){
             // new_free_block->next = block->next;
@@ -95,8 +97,7 @@ block_metadata* coalesce(block_metadata* left, block_metadata* right){
 block_metadata* get_address_block(void* address){
     block_metadata* pointer = heap_begin;
     if (heap_begin <= address && address <= heap_end){
-
-        while (pointer && ((size_t)pointer + pointer->size <= address)){
+        while (pointer && ((size_t)pointer + METADATA_SIZE + pointer->size <= address)){
             pointer = pointer-> next;
         }
 

@@ -13,7 +13,7 @@ int main() {
 
     block_metadata* pointer = heap_begin;
     while (pointer != NULL){
-        printf("%d %d\n", pointer->size, pointer->free);
+        printf("%p %d %d\n",pointer, pointer->size, pointer->free);
         pointer = pointer->next;
     }
     printf("\n");
@@ -22,7 +22,7 @@ int main() {
 
     pointer = heap_begin;
     while (pointer != NULL){
-        printf("%d %d\n", pointer->size, pointer->free);
+        printf("%p %d %d\n",pointer, pointer->size, pointer->free);
         pointer = pointer->next;
     }
     printf("\n");
@@ -31,7 +31,7 @@ int main() {
 
     pointer = heap_begin;
     while (pointer != NULL){
-        printf("%d %d\n", pointer->size, pointer->free);
+        printf("%p %d %d\n",pointer, pointer->size, pointer->free);
         pointer = pointer->next;
     }
     printf("\n");
@@ -40,7 +40,7 @@ int main() {
 
     pointer = heap_begin;
     while (pointer != NULL){
-        printf("%d %d\n", pointer->size, pointer->free);
+        printf("%p %d %d\n",pointer, pointer->size, pointer->free);
         pointer = pointer->next;
     }
     printf("\n");
@@ -49,7 +49,7 @@ int main() {
 
     pointer = heap_begin;
     while (pointer != NULL){
-        printf("%d %d\n", pointer->size, pointer->free);
+        printf("%p %d %d\n",pointer, pointer->size, pointer->free);
         pointer = pointer->next;
     }
     printf("\n");
@@ -58,7 +58,30 @@ int main() {
 
     pointer = heap_begin;
     while (pointer != NULL){
-        printf("%d %d\n", pointer->size, pointer->free);
+        printf("%p %d %d\n",pointer, pointer->size, pointer->free);
+        pointer = pointer->next;
+    }
+    printf("\n");
+
+    for(int i = 0; i < 3; i++) {
+        printf("%d ", space[i]);
+    }
+
+    printf("%p\n", space);
+    deallocate_memory(space);
+
+    pointer = heap_begin;
+    while (pointer != NULL){
+        printf("%p %d %d\n",pointer, pointer->size, pointer->free);
+        pointer = pointer->next;
+    }
+    printf("\n");
+
+    deallocate_memory(heap_begin);
+
+     pointer = heap_begin;
+    while (pointer != NULL){
+        printf("%p %d %d\n",pointer, pointer->size, pointer->free);
         pointer = pointer->next;
     }
     printf("\n");
