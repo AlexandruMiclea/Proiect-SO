@@ -15,7 +15,7 @@ by multiple processes, and ensure proper allocation of memory blocks, and the re
 
 ## Implementation details
 
-Double linked list, where the beginning of each block contains 32 bytes of metadata, immediately followed by the memory required
+Double linked list, where the beginning of each block contains 32 bytes of metadata, immediately followed by the memory required.
 The metadata contains information about the size of the block, pointers to the previous and next nodes in the list, and the value
 of its status (0 for occupied, 1 for free).
 
@@ -34,7 +34,7 @@ As is the tradition when attempting such a task, it is imperative to include a l
 - A lot of void* pointer arithmetic
 - I can still write to freed memory zones
 - I can write over the block metadata, potentially corrupting my list
-- No free list, so at some point allocations can be slow
+- No free list, so at some point allocations can become slow
 
 ## How to run
 
