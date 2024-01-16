@@ -116,6 +116,11 @@ block_metadata* get_address_block(void* address){
 }
 
 void return_to_heap(block_metadata* block) {
+
+    // if I am the rightmost block and I am free, it's better to deallocate myself
+    // that is if I am not also the only block on the heap, then it is best to keep
+    // myself
+    
     if (block->next == NULL && block->prev != NULL) {
         block->prev->next = NULL;
         heap_end -= (size_t)(block->size + METADATA_SIZE);
