@@ -12,6 +12,7 @@
 #include <sys/stat.h>
 #include <bits/mman-linux.h>
 #include <stdbool.h>
+#include <pthread.h>
 
 // the linked list will be arranged as follows:
 
@@ -35,6 +36,9 @@ typedef struct block_metadata {
 
 extern void *heap_begin;
 extern void *heap_end;
+extern pthread_mutexattr_t attr;
+extern pthread_mutex_t mutex;
+extern bool mutex_is_initialized;
 
 block_metadata *find_free_block(block_metadata* last, size_t req_size);
 block_metadata *request_space(block_metadata* last, size_t req_size);
@@ -44,6 +48,8 @@ block_metadata *insert_block_between(block_metadata* new, block_metadata* left, 
 bool check_if_both_free(block_metadata* left, block_metadata* right);
 block_metadata* coalesce(block_metadata* left, block_metadata* right);
 block_metadata* get_address_block(void* address);
+void return_to_heap(block_metadata* block);
+void init_mutex();
 
 // the four methods of interest
 

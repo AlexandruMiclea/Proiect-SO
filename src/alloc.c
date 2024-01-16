@@ -73,6 +73,9 @@ block_metadata *split_residual_memory(block_metadata* block, size_t occupied_siz
         }
         block->next = new_free_block;
         block->size = occupied_size;
+    } else {
+        // give the rest of the space ([1, 32] bytes) to my block
+        block->size += total_space - (occupied_size + METADATA_SIZE);
     }
 
     block->free = 0;
@@ -110,4 +113,12 @@ block_metadata* get_address_block(void* address){
         exit(1);
     }
     return pointer;
+}
+
+void return_to_heap(block_metadata* block) {
+    if (block->next == NULL && block->prev != NULL) {
+        block->prev->next = NULL;
+        heap_end -= (size_t)(block->size + METADATA_SIZE);
+        munmap((void *)block, block->size + METADATA_SIZE);
+    }
 }

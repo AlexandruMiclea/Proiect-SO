@@ -1,5 +1,5 @@
 CC=gcc
-CFLAGS= -I../inc -Wall -Wextra -Wpedantic -g -ggdb -std=gnu11
+CFLAGS= -I../inc -Wall -Wextra -Wpedantic -lpthread -g -ggdb -std=gnu11
 LDFLAGS = 
 
 OBJDIR = obj
